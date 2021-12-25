@@ -1,2 +1,2 @@
-# codebreakers
-Programs for Science Olympiad codebreakers event practice
+# codebusters
+Programs for Science Olympiad codebusters event practice
