@@ -14,18 +14,31 @@ import re
 
 
 def findQuotesLit(html):
-    return re.findall("div>\n([\s\S]*)\n", html)
+    return re.findall("div>\s+\"?([\.a-zA-Z0,!?;:\' ]+?)\"?\n[\s\S]*", html)
+
+    # trying to get author but it isnt working for all quotes
+    #  by <.+>([\w ]+)<
+
+
+    # "div>\n\"?(.+)\"?\n"
 # ~ <i>.*</i>\nby<[\s\S]+>(.+)</a>
+
+
 def getQuotesLit(topicList):
+    quotes = []
+
     for topic in topicList:
         link = "https://www.litquotes.com/quote_topic_resp.php?QuoteType=" + topic
         f = requests.get(link)
         html = f.text
 
-        print(html)
-        print(findQuotesLit(html))
+        # print(html)
 
-getQuotesLit(["Autumn"])
+        quotes.append(findQuotesLit(html))
+
+    return quotes
+
+print(getQuotesLit(["Life"]))
 
 
 
