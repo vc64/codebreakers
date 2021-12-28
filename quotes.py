@@ -2,6 +2,7 @@ import random
 import requests
 import re
 import string
+import math
 
 # todo
 # look into where to get quotes, maybe litquotes
@@ -17,8 +18,9 @@ import string
 def findQuotesLit(html):
 
     # string.punctuation -> !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-    accepted_punctuation = "!\"&'(),-./:;?\_`"
-    pattern = "div>\s+\"?([\.a-zA-Z" + accepted_punctuation + " ]+?)\"?\n[\s\S]*?by <.+>([\w" + accepted_punctuation + " ]+)<"
+    # accepted_punctuation = "!\"#&'(),-./:;?\_`"
+    accepted_punctuation = string.punctuation
+    pattern = "div>\s+\"?([\s\S]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
 
     return re.findall(pattern, html)
 
@@ -40,11 +42,19 @@ def getQuotesLit(topicList):
 
         # print(html)
 
-        quotes.append(findQuotesLit(html))
+        numQuotes = int(re.findall(">(\d+).+?Quotes from Literature", html)[0])
+
+        for i in range(1, math.ceil(numQuotes/10)+1):
+            # print(i)
+            link = "https://www.litquotes.com/quote_topic_resp.php?QuoteType=" + topic + "&page=" + str(i)
+            f = requests.get(link)
+            html = f.text
+            quotes.append(findQuotesLit(html))
 
     return quotes
 
-print(len(getQuotesLit(["Life"])[0]))
+print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn", "Winter", "Science"])])
+# print(getQuotesLit(["Life"])[1])
 
 # todo
 # get the total number of quotes per topic and 
@@ -54,5 +64,8 @@ print(len(getQuotesLit(["Life"])[0]))
 # filter based on quote length
 # save locally to avoid issues if website changes or etc
 
-
+# link = "https://www.litquotes.com/quote_topic_resp.php?QuoteType=" + "Life" + "&page=9"
+# f = requests.get(link)
+# html = f.text
+# print(html)
 
