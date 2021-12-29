@@ -57,10 +57,6 @@ print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn", "Winter", "Scien
 # print(getQuotesLit(["Life"])[1])
 
 # todo
-# get the total number of quotes per topic and 
-#       use that to judge how many pages of quotes 
-#       can be taken
-# 
 # filter based on quote length
 # save locally to avoid issues if website changes or etc
 
