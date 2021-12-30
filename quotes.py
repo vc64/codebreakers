@@ -20,8 +20,9 @@ def findQuotesLit(html):
     # string.punctuation -> !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
     # accepted_punctuation = "!\"#&'(),-./:;?\_`"
     accepted_punctuation = string.punctuation
-    pattern = "div>\s+\"?([\s\S]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
+    # pattern = "div>\s+\"?([\s\S]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
 
+    pattern = "div>\s+\"?([^<>\\\\]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
     return re.findall(pattern, html)
 
     # trying to get author but it isnt working for all quotes
@@ -53,7 +54,8 @@ def getQuotesLit(topicList):
 
     return quotes
 
-print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn", "Winter", "Science"])])
+# print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn", "Winter", "Science"])])
+print(getQuotesLit(["Life"])[0])
 # print(getQuotesLit(["Life"])[1])
 
 # todo
