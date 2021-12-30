@@ -22,7 +22,7 @@ def findQuotesLit(html):
     accepted_punctuation = string.punctuation
     # pattern = "div>\s+\"?([\s\S]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
 
-    pattern = "div>\s+\"?([^<>\\\\]+?)\"?\n[\s\S]*?by <.+>([\s\S]+?)<"
+    pattern = "div>\s+\"?([^<>\\\\]{85,})\"?\n* ~[\s\S]*?by <A.+?>([\s\S]+?)<"
     return re.findall(pattern, html)
 
     # trying to get author but it isnt working for all quotes
@@ -54,16 +54,10 @@ def getQuotesLit(topicList):
 
     return quotes
 
-# print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn", "Winter", "Science"])])
-print(getQuotesLit(["Life"])[0])
+print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn"])])
+# print(getQuotesLit(["Life"])[0])
 # print(getQuotesLit(["Life"])[1])
 
 # todo
-# filter based on quote length
 # save locally to avoid issues if website changes or etc
-
-# link = "https://www.litquotes.com/quote_topic_resp.php?QuoteType=" + "Life" + "&page=9"
-# f = requests.get(link)
-# html = f.text
-# print(html)
 
