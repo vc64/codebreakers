@@ -54,7 +54,9 @@ def getQuotesLit(topicList):
 
     return quotes
 
-print([len(x) for x in getQuotesLit(["Life", "Death", "Autumn"])])
+topic_list = ["Life", "Death", "Autumn", "Winter"]
+
+print([len(x) for x in getQuotesLit(topic_list)])
 # print(getQuotesLit(["Life"])[0])
 # print(getQuotesLit(["Life"])[1])
 
